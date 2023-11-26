@@ -1,5 +1,5 @@
 import { useNavigate, useParams } from 'react-router-dom'
-import Image from '../../assets/ae74941c3eecdc36b0d21e6056eccdaf.png'
+import Image from '../../assets/avatar.jpg'
 import AudioPlayer from '../../components/Player'
 import "./style.css"
 
