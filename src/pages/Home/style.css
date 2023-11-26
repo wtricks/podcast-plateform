@@ -1,0 +1,56 @@
+main.detail-page {
+    align-items: unset;
+    margin-top: 0.3rem;
+    max-width: 992px;
+    padding-bottom: 2rem;
+}
+
+.detail-page h2 {
+    font-size: 1.3rem;
+}
+
+.detail-page .top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.detail-page .top button {
+    padding: 0.4rem;
+    font-size: 0.9rem;
+}
+
+.banner {
+    margin-top: 1rem;
+    width: 100%;
+    height: 15rem;
+    overflow: hidden;
+    border-radius: 1.25rem;
+    background: linear-gradient(178deg, rgba(58, 129, 191, 0.30) 1.63%, rgba(65, 48, 90, 0.01) 148.18%);
+}
+
+.banner img {
+    width: 100%;
+    min-height: 100%;
+    object-fit: cover;
+}
+
+.desc {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+}
+
+.episodes h4 {
+    margin-bottom: 0.6rem;
+}
+
+.episodes .desc {
+    margin-bottom: 0rem;
+    margin-top: 0.5rem;
+}
+
+.episodes button {
+    width: 90px;
+    padding: 0.4rem 0.6rem;
+    font-size: 0.9rem;
+}

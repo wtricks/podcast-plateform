@@ -1,0 +1,24 @@
+main {
+    max-width: 1296px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+main h2 {
+    font-size: 1.2rem;
+    margin-bottom: 0.3rem;
+}
+
+main p {
+    font-size: 0.9rem;
+    margin: 0;
+    margin-bottom: 2rem;
+}
+
+main .tagline {
+    margin-top: 1.4rem;
+    font-size: 0.8rem;
+}

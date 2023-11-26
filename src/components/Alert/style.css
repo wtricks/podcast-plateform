@@ -1,0 +1,44 @@
+.alert-box {
+    position: fixed;
+    top: 20px;
+    right: 0;
+}
+
+.alert-box .alert-message {
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 0.4rem 0.5rem;
+    color: #20062E;
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.4rem;
+    transition: 0.3s;
+    transform: translateX(20px);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 3px 5px rgba(0, 0, 0, 0.15);
+}
+
+.alert-box .alert-message.show {
+    transform: translateX(-20px);
+}
+
+.alert-box .line {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    background-color: #18B2DE;
+    transition: width var(--duration) linear;
+}
+
+.alert-box p {
+    margin: 0;
+}
+
+.alert-box button {
+    padding: 0.2rem 0.8rem;
+    color: #20062E;
+    background-color: #eeeeee;
+    margin-left: 0.4rem;
+}

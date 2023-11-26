@@ -1,0 +1,23 @@
+.podcast-container {
+    margin-top: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    max-width: 1050px;
+    padding-bottom: 2rem;
+    justify-content: center;
+}
+
+.no-data-found {
+    padding: 2rem 0.8rem;
+    text-align: center;
+}
+
+.no-data-found h4 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.no-data-found p {
+    font-size: 0.9rem;
+}
