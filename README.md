@@ -27,4 +27,4 @@ pnpm run dev
 
 # Demo
 
-[See demo on vercel](https://podcast-plateform-48tp.vercel.app/auth/signin)
+[See demo on vercel](https://podcast-plateform-48tp.vercel.app)
