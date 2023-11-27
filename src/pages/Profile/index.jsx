@@ -1,20 +1,26 @@
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { signOut } from 'firebase/auth'
 
-import { auth } from '../../firebase'
+import { auth, db } from '../../firebase'
 import { userSelector } from '../../store/user'
+import { podcastSelector, changePodcast } from '../../store/profile'
 import PodcastContainer from '../../components/PodcastContainer'
 import { useAlert } from '../../context/Alert'
 import DefaultAvatar from '../../assets/avatar.jpg'
 import './style.css'
 
-import { dummyHomePodcast } from '../../constants/dummy-data'
+import { collection, getDocs, query, where } from 'firebase/firestore'
 
-export default function Home() {
+export default function Profile() {
     const show = useAlert()
     const user = useSelector(userSelector);
     const navigate = useNavigate()
+    const dispatch = useDispatch()
+    const podcast = useSelector(podcastSelector)
+
+    const [loading, setLoading] = useState(false);
 
     const logout = () => {
         signOut(auth)
@@ -25,6 +31,29 @@ export default function Home() {
                 show("An error occured: " + e.message)
             })
     }
+
+    useEffect(() => {
+        if (!podcast.length) {
+            setLoading(true)
+        }
+        (async () => {
+            const podcastsRef = query(collection(db, 'podcasts'), where('createdBy', '==', auth.currentUser.uid));
+            const querySnapshot = await getDocs(podcastsRef);
+            const podcasts = [];
+
+            querySnapshot.forEach((doc) => {
+                const podcast = {
+                    id: doc.id,
+                    ...doc.data(),
+                    createAt: doc.data().createAt.toDate().toString()
+                };
+                podcasts.push(podcast);
+            });
+
+            dispatch(changePodcast(podcasts))
+            setLoading(false)
+        })()
+    }, [])
 
     return (
         <div className="container">
@@ -45,7 +74,8 @@ export default function Home() {
 
                 <h2 style={{ marginTop: '2rem' }}>Podcasts</h2>
                 <PodcastContainer
-                    podcasts={dummyHomePodcast}
+                    podcasts={podcast}
+                    loading={loading}
                 />
             </main>
         </div>

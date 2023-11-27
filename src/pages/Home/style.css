@@ -54,3 +54,12 @@ main.detail-page {
     padding: 0.4rem 0.6rem;
     font-size: 0.9rem;
 }
+
+.no-h {
+    margin-top: 2rem;
+}
+
+.no-h,
+.no-p {
+    text-align: center
+}

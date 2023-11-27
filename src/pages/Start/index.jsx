@@ -1,3 +1,9 @@
+import { useState } from 'react'
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage'
+import { addDoc, collection } from 'firebase/firestore'
+
+import { auth, db, storage } from '../../firebase'
+import { useAlert } from '../../context/Alert'
 import Form from '../../components/Form'
 import './style.css'
 
@@ -25,8 +31,51 @@ const FORM_DATA = [
 ]
 
 export default function SignUp() {
-    const onSubmitEvent = (formData, form) => {
-        console.log(form, formData)
+    const show = useAlert();
+    const [loading, setLoading] = useState(false)
+    const onSubmitEvent = async (data, reset) => {
+        if (!data.title) {
+            show('Podcast title is required!')
+        }
+        else if (!data.description) {
+            show('Podcast description is required!')
+        }
+        else if (!data.bannerImage) {
+            show('Podcast banner image is required!')
+        }
+        else if (!data.smallImage) {
+            show('Podcast small image is required!')
+        }
+        else {
+            setLoading(true);
+            try {
+                // banner image
+                const bannerImageRef = ref(storage, `podcast/podcast-${Date.now()}`);
+                await uploadBytes(bannerImageRef, data.bannerImage)
+                const bannerImageUrl = await getDownloadURL(bannerImageRef);
+
+                // Small image
+                const smallImageRef = ref(storage, `podcast/podcast-${Date.now()}`);
+                await uploadBytes(smallImageRef, data.smallImage)
+                const smallImageUrl = await getDownloadURL(smallImageRef);
+
+                await addDoc(collection(db, 'podcasts'), {
+                    title: data.title,
+                    description: data.description,
+                    bannerImage: bannerImageUrl,
+                    smallImage: smallImageUrl,
+                    createdBy: auth.currentUser.uid,
+                    createAt: new Date()
+                })
+
+                show("Podcast is created successfully")
+                setLoading(false);
+                reset();
+            } catch (error) {
+                setLoading(false);
+                show('An error occured: ' + error.message)
+            }
+        }
     }
 
     return (
@@ -40,6 +89,7 @@ export default function SignUp() {
                     buttonText="Create Now"
                     onSubmit={onSubmitEvent}
                     action="/create"
+                    loading={loading}
                 />
             </main>
         </div>

@@ -45,7 +45,7 @@ export default function FileInput({ style, title, value, setValue, accept = 'ima
                             onChange={(e) => setValue(e.target.files?.[0])}
                         />
                     </div>
-                    : <div className={'image' + (accept == 'audio/*' ? ' audio' : '')} style={style}>
+                    : <div className={'images ' + accept.slice(0, 5)} style={style}>
                         {accept == 'audio/*'
                             // eslint-disable-next-line react/prop-types
                             ? <span>Audio &apos;{value.name.slice(0, 20)}...&apos; is selected</span>

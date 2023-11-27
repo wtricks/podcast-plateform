@@ -27,7 +27,7 @@ export default function PodcastContainer({ loading, podcasts, errorHeading, erro
             {podcasts.map((podcast => (
                 <Card
                     key={podcast.id}
-                    src={podcast.image}
+                    src={podcast.smallImage}
                     title={podcast.title}
                     id={podcast.id}
                 />
